@@ -12,7 +12,7 @@ public:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
 
 private:
-    Q_DISABLE_COPY(SimpleListModel);
+    Q_DISABLE_COPY(SimpleListModel)
     static const int FirstNameRole;
     static const int LastNameRole;
 };

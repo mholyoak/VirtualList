@@ -7,7 +7,15 @@ Window {
     width: 640
     height: 480
     title: qsTr("Virtual List")
-/*
+
+    ListView {
+        width: 200; height: 250
+
+        model: nameModel
+        delegate:  Text { text: "Name: " + firstName }
+    }
+
+    /*
     Button {
         id: oneBtn
         text: "One"
@@ -42,6 +50,7 @@ Window {
     }
 */
 
+    /*
     ListModel {
         id: nameModel
         ListElement { name: "Alice" }
@@ -58,6 +67,7 @@ Window {
         ListElement { name: "Harry" }
         ListElement { name: "Wendy" }
     }
+
     Component {
         id: nameDelegate
         Button {
@@ -72,14 +82,6 @@ Window {
         model: nameModel
         delegate: nameDelegate
         header: bannercomponent
-        footer: Rectangle {
-            width: parent.width; height: 30;
-            gradient: clubcolors
-        }
-        highlight: Rectangle {
-            width: parent.width
-            color: "lightgray"
-        }
     }
 
     Component {     //instantiated when header is processed
@@ -101,6 +103,7 @@ Window {
         GradientStop { position: 0.0; color: "#8EE2FE"}
         GradientStop { position: 0.66; color: "#7ED2EE"}
     }
+    */
 
     /*
     Text {

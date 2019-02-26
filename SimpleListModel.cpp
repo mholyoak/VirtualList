@@ -1,11 +1,12 @@
 #include "SimpleListModel.h"
 
 #include <QHash>
+#include <QDebug>
 
 // You can define custom data roles starting with Qt::UserRole
 const int SimpleListModel::FirstNameRole = Qt::UserRole + 1;
 const int SimpleListModel::LastNameRole = Qt::UserRole + 2;
-const int maxItems = 1000;
+const int maxItems = 1000000;
 
 SimpleListModel::SimpleListModel(QObject *parent) :
         QAbstractListModel(parent)
@@ -43,6 +44,7 @@ QVariant SimpleListModel::data(const QModelIndex &index,
     {
         QString firstName;
         firstName.sprintf("First_%d", index.row());
+        qDebug("GetName %s", qPrintable(firstName));
         return QVariant::fromValue(firstName);
     }
     case LastNameRole:

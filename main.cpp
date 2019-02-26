@@ -1,5 +1,8 @@
+#include "SimpleListModel.h"
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 
 int main(int argc, char *argv[])
 {
@@ -8,6 +11,13 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    auto rootContext = engine.rootContext();
+    SimpleListModel nameListModel;
+
+    rootContext->setContextProperty("nameModel",
+                                     &nameListModel);
+
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;
