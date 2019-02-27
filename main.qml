@@ -9,9 +9,28 @@ Window {
     title: qsTr("Virtual List")
 
     ListView {
+        id: nameListId
         anchors.fill: parent
-
+        width: 50
+        highlightFollowsCurrentItem: false
         model: nameModel
         delegate:  Text { text: "Name: " + firstName }
+    }
+
+    Button {
+        id: topBtnId
+        text: "Top"
+
+        anchors.right: nameListId.right
+        onClicked: nameListId.positionViewAtBeginning()
+    }
+
+    Button {
+        text: "Bottom"
+
+        anchors.right: nameListId.right
+        anchors.top: topBtnId.bottom
+
+        onClicked: nameListId.positionViewAtEnd()
     }
 }
