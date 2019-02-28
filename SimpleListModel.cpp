@@ -6,6 +6,7 @@
 // You can define custom data roles starting with Qt::UserRole
 const int SimpleListModel::FirstNameRole = Qt::UserRole + 1;
 const int SimpleListModel::LastNameRole = Qt::UserRole + 2;
+const int SimpleListModel::ActiveRole = Qt::UserRole + 3;
 const int maxItems = 1000000;
 
 SimpleListModel::SimpleListModel(QObject *parent) :
@@ -18,6 +19,7 @@ QHash<int, QByteArray> SimpleListModel::roleNames() const
     auto roles = QAbstractItemModel::roleNames();
     roles.insert(FirstNameRole, QByteArray("firstName"));
     roles.insert(LastNameRole, QByteArray("lastName"));
+    roles.insert(ActiveRole, QByteArray("active"));
     return roles;
 }
 
@@ -52,6 +54,13 @@ QVariant SimpleListModel::data(const QModelIndex &index,
         QString lastName;
         lastName.sprintf("Last_%d", index.row());
         return QVariant::fromValue(lastName);
+    }
+    case ActiveRole:
+    {
+        bool active;
+        active = index.row() % 2;
+        qDebug("Active %d %s", index.row(), active ? "True" : "False");
+        return QVariant::fromValue(active);
     }
     default:
         return QVariant();

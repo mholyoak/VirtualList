@@ -15,6 +15,7 @@ private:
     Q_DISABLE_COPY(SimpleListModel)
     static const int FirstNameRole;
     static const int LastNameRole;
+    static const int ActiveRole;
 };
 
 #endif // SIMPLELISTMODEL_H

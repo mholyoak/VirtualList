@@ -1,6 +1,7 @@
 import QtQuick 2.9
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.2
+import QtQuick.Layouts 1.3
 
 Window {
     visible: true
@@ -14,7 +15,10 @@ Window {
         width: 50
         highlightFollowsCurrentItem: false
         model: nameModel
-        delegate:  Text { text: "Name: " + firstName }
+        delegate:  RowLayout {
+            Text { text: "Name: " + model.firstName }
+            CheckBox { checked: model.active; text: "Active" }
+        }
     }
 
     Button {
