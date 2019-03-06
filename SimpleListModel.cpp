@@ -3,14 +3,32 @@
 #include <QHash>
 #include <QDebug>
 
+Container::Container(QQuickItem *parent) :
+    QQuickItem(parent)
+{
+    m_name = "Test";
+}
+
+Container::~Container()
+{
+    qDebug("Container destroyed");
+}
+
+QString Container::name() const
+{
+    return m_name;
+}
+
 // You can define custom data roles starting with Qt::UserRole
 const int SimpleListModel::FirstNameRole = Qt::UserRole + 1;
 const int SimpleListModel::LastNameRole = Qt::UserRole + 2;
 const int SimpleListModel::ActiveRole = Qt::UserRole + 3;
+const int SimpleListModel::ContainerRole = Qt::UserRole + 4;
 const int maxItems = 1000000;
 
-SimpleListModel::SimpleListModel(QObject *parent) :
-        QAbstractListModel(parent)
+SimpleListModel::SimpleListModel(QQuickItem *parent) :
+        QAbstractListModel(parent),
+        mContainer(std::make_shared<Container>(parent))
 {
 }
 
@@ -20,6 +38,7 @@ QHash<int, QByteArray> SimpleListModel::roleNames() const
     roles.insert(FirstNameRole, QByteArray("firstName"));
     roles.insert(LastNameRole, QByteArray("lastName"));
     roles.insert(ActiveRole, QByteArray("active"));
+    roles.insert(ContainerRole, QByteArray("container"));
     return roles;
 }
 
@@ -61,6 +80,10 @@ QVariant SimpleListModel::data(const QModelIndex &index,
         active = index.row() % 2;
         qDebug("Active %d %s", index.row(), active ? "True" : "False");
         return QVariant::fromValue(active);
+    }
+    case ContainerRole:
+    {
+        return QVariant::fromValue(mContainer.get());
     }
     default:
         return QVariant();

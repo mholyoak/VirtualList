@@ -15,6 +15,8 @@ int main(int argc, char *argv[])
     auto rootContext = engine.rootContext();
     SimpleListModel nameListModel;
 
+    qmlRegisterType<Container>("name.holyoak", 1, 0, "Container");
+
     rootContext->setContextProperty("nameModel",
                                      &nameListModel);
 

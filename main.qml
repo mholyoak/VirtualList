@@ -2,6 +2,7 @@ import QtQuick 2.9
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.2
 import QtQuick.Layouts 1.3
+import name.holyoak 1.0
 
 Window {
     visible: true
@@ -18,6 +19,7 @@ Window {
         delegate:  RowLayout {
             Text { text: "Name: " + model.firstName }
             CheckBox { checked: model.active; text: "Active" }
+            Text { text: "Container: " + model.container.name }
         }
     }
 
