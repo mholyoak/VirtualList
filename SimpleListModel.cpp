@@ -19,6 +19,11 @@ QString Container::name() const
     return m_name;
 }
 
+void Container::setName(const QString& newName)
+{
+    m_name = newName;
+}
+
 // You can define custom data roles starting with Qt::UserRole
 const int SimpleListModel::FirstNameRole = Qt::UserRole + 1;
 const int SimpleListModel::LastNameRole = Qt::UserRole + 2;
@@ -83,6 +88,7 @@ QVariant SimpleListModel::data(const QModelIndex &index,
     }
     case ContainerRole:
     {
+        mContainer->setName(QString("Name-%1").arg(index.row()));
         return QVariant::fromValue(mContainer.get());
     }
     default:

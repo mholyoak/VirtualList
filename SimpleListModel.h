@@ -21,6 +21,8 @@ public:
 
     QString name() const;
 
+    void setName(const QString& newName);
+
 };
 
 
